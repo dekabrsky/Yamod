@@ -109,7 +109,7 @@ public class ModbusSerialMaster {
 	 */
 	public void connect() throws Exception {
 		if (m_Connection != null && !m_Connection.isOpen()) {
-			m_Connection.open(Modbus.DEFAULT_TIMEOUT);
+			m_Connection.connect(Modbus.DEFAULT_TIMEOUT);
 			m_Transaction = new ModbusSerialTransaction(m_Connection);
 
 		}

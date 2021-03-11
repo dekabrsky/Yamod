@@ -36,7 +36,7 @@ import android.hardware.usb.UsbManager;
  * @author John Charlton
  * @version @version@ (@date@)
  */
-public class SerialConnection {
+public class SerialConnection implements MasterConnection {
 
 	private SerialParameters m_Parameters;
 	private UsbSerialParameters u_Parameters;
@@ -103,7 +103,7 @@ public class SerialConnection {
 	 *             if an error occurs.
 	 * @param defaultTimeout
 	 */
-	public void open(int defaultTimeout) throws Exception {
+	public void connect(int defaultTimeout) throws Exception {
 		m_SerialDevice = UsbSerialProber.acquire(m_UsbManager);
 		// Log.d(TAG, "Resumed, mSerialDevice=" + m_SerialDevice);
 		if (m_SerialDevice != null) {
@@ -125,7 +125,6 @@ public class SerialConnection {
 		else {
 			throw new Exception("No serial device");
 		}
-
 		m_Open = true;
 	}// open
 
@@ -178,6 +177,17 @@ public class SerialConnection {
 		 * throw new Exception("Unsupported flow control"); }
 		 */
 	}// setConnectionParameters
+
+	@Override
+	public void connect() throws Exception {
+		connect(1000);
+	}
+
+
+	@Override
+	public boolean isConnected() {
+		return m_Open;
+	}
 
 	/**
 	 * Close the port and clean up associated elements.

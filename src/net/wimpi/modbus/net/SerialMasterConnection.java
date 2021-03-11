@@ -1,8 +1,6 @@
 package net.wimpi.modbus.net;
 
 import net.wimpi.modbus.Modbus;
-import net.wimpi.modbus.net.MasterConnection;
-import net.wimpi.modbus.net.SerialConnection;
 import net.wimpi.modbus.util.SerialParameters;
 
 /**
@@ -33,13 +31,13 @@ public class SerialMasterConnection implements MasterConnection
     @Override
     public void connect() throws Exception
     {
-        connection.open(Modbus.DEFAULT_TIMEOUT);
+        connection.connect(Modbus.DEFAULT_TIMEOUT);
     }
 
     @Override
     public void connect(int timeout) throws Exception
     {
-        connection.open(timeout);
+        connection.connect(timeout);
     }
 
     @Override
